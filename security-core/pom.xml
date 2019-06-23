@@ -6,6 +6,7 @@
         <artifactId>security-all</artifactId>
         <groupId>com.github.qingyejiazhu</groupId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../../security-all</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -71,7 +72,8 @@
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>
         </dependency>
-
+<!--        spring默认使用yml中的配置，但有时候要用传统的xml或properties配置，就需要使用spring-boot-configuration-processor了
+        先引入pom依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
