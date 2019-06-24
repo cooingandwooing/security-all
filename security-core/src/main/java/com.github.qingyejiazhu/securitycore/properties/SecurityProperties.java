@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @description
  * @date 2019-06-23 21:54
  */
-@ConfigurationProperties(prefix = "imooc.security")
+@ConfigurationProperties(prefix = "zhanlu.security")
 public class SecurityProperties {
     /** imooc.security.browser 路径下的配置会被映射到该配置类中 */
     private BrowserProperties browser = new BrowserProperties();
