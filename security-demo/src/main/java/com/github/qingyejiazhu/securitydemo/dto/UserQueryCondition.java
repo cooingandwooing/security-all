@@ -13,6 +13,7 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class UserQueryCondition {
 
+
     private String username;
 
     @ApiModelProperty(value = "用户年龄起始值")
