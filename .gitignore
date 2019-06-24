@@ -18,7 +18,8 @@
 *.ipr
 /out/
 /target/
-
+# ignore Maven generated target folders
+target
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
