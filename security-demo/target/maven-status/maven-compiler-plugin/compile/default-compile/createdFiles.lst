@@ -1,5 +1,0 @@
-com\github\qingyejiazhu\securitydemo\web\controller\UserController.class
-com\github\qingyejiazhu\securitydemo\dto\User.class
-com\github\qingyejiazhu\securitydemo\DemoApplication.class
-com\github\qingyejiazhu\securitydemo\web\wiremock\WiremockServer.class
-com\github\qingyejiazhu\securitydemo\dto\UserQueryCondition.class
