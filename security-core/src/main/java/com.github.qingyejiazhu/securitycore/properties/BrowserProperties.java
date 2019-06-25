@@ -7,14 +7,24 @@ package com.github.qingyejiazhu.securitycore.properties;
  */
 public class BrowserProperties {
     private SessionProperties session = new SessionProperties();
-
+    /** 注册页面 */
     private String signUpUrl = "/imooc-signUp.html";
-
+    /** 登录页面路径 */
     private String loginPage = SecurityConstants.DEFAULT_LOGIN_PAGE_URL;
 
     private LoginResponseType loginType = LoginResponseType.JSON;
 
-    private int rememberMeSeconds = 3600;
+    private int rememberMeSeconds = 600;
+    /** 退出成功页面 */
+    private String signOutUrl;
+
+    public String getSignOutUrl() {
+        return signOutUrl;
+    }
+
+    public void setSignOutUrl(String signOutUrl) {
+        this.signOutUrl = signOutUrl;
+    }
 
     public String getLoginPage() {
         return loginPage;

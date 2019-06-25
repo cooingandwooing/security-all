@@ -20,7 +20,9 @@ public interface SecurityConstants {
 	 */
 	public static final String DEFAULT_UNAUTHENTICATION_URL = "/authentication/require";
 	/**
-	 * 默认的用户名密码登录请求处理url
+	 * 默认的用户名密码登录请求处理url ： 框架拦截认证url，
+	 * 登录的时候提交地址写这个，只是框架内部使用，配置方不需要存储在该地址
+	 * 还是根据security过滤器链原理决定了，拦截指定的url，完成特定服务的功能
 	 */
 	public static final String DEFAULT_LOGIN_PROCESSING_URL_FORM = "/authentication/form";
 	/**
@@ -49,5 +51,13 @@ public interface SecurityConstants {
 	 * session失效默认的跳转地址
 	 */
 	public static final String DEFAULT_SESSION_INVALID_URL = "/session/invalid";
+
+
+	/** openId登录拦截地址 */
+	public static final String DEFAULT_LOGIN_PROCESSING_URL_OPEN_ID = "/authentication/openid";
+	/** openId字段名 */
+	public static final String DEFAULT_PARAMETER_NAME_OPEN_ID = "openId";
+	/** providerId参数名 */
+	public static final String DEFAULT_PARAMETER_NAME_PROVIDERID = "providerId";
 
 }

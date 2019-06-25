@@ -4,6 +4,7 @@ import com.github.qingyejiazhu.securitycore.properties.SmsCodeProperties;
 import com.github.qingyejiazhu.securitycore.validate.code.ValidateCode;
 import com.github.qingyejiazhu.securitycore.validate.code.ValidateCodeGenerator;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
  * @date 2018/8/4 11:30
  * @since 1.0
  */
+
 public class SmsValidateCodeGenerator implements ValidateCodeGenerator {
     private SmsCodeProperties smsCodeProperties;
 

@@ -95,6 +95,7 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
         if (validateCodeGenerator == null) {
             throw new ValidateCodeException("验证码生成器" + generatorName + "不存在");
         }
+        //return (C) validateCodeGenerator.generate(request.getRequest());
         return (C) validateCodeGenerator.generate(request.getRequest());
     }
 

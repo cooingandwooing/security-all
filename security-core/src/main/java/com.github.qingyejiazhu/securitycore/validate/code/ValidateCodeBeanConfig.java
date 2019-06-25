@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 1.0
  */
 @Configuration
-public class ValidateCodeConfig {
+public class ValidateCodeBeanConfig {
     @Autowired
     private SecurityProperties securityProperties;
 
@@ -27,8 +27,10 @@ public class ValidateCodeConfig {
     @Bean
     @ConditionalOnMissingBean(name = "imageValidateCodeGenerator")
     public ValidateCodeGenerator imageValidateCodeGenerator() {
-        ImageValidateCodeGenerator imageCodeGenerate = new ImageValidateCodeGenerator(securityProperties.getCode().getImage());
-        return imageCodeGenerate;
+        //ImageValidateCodeGenerator2 imageCodeGenerate = new ImageValidateCodeGenerator2(securityProperties.getCode().getImage());
+        ImageValidateCodeGenerator codeGenerator = new ImageValidateCodeGenerator();
+        codeGenerator.setSecurityProperties(securityProperties);
+        return codeGenerator;
     }
 
     // 这里由于产生了多个ValidateCodeGenerate的实现类

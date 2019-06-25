@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.github.qingyejiazhu.securitybrowser.support.SimpleResponse;
+import com.github.qingyejiazhu.securitycore.properties.SecurityConstants;
 import com.github.qingyejiazhu.securitycore.properties.SecurityProperties;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -44,7 +45,7 @@ public class BrowserSecurityController {
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping("/authentication/require")
+	@RequestMapping(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL) //("/authentication/require")
 	@ResponseStatus(code = HttpStatus.UNAUTHORIZED)
 	public SimpleResponse requirAuthentication(HttpServletRequest request, HttpServletResponse response) throws IOException {
 

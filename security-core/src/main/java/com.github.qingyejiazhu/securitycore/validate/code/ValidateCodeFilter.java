@@ -27,7 +27,7 @@ import java.util.Set;
  * @version : V1.0
  * @date : 2018/8/3 23:24
  */
-@Component
+@Component("validateCodeFilter")
 public class ValidateCodeFilter extends OncePerRequestFilter implements InitializingBean {
     // 应用方设置的，目前浏览器项目中有一个 MyAuthenticationFailureHandler
     @Autowired
@@ -46,13 +46,15 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
     /**
      * org.springframework.beans.factory.InitializingBean 保证在其他属性都设置完成后，有beanFactory调用
      * 但是在这里目前还是需要初始化处调用该方法
+     *
      * @throws ServletException
      */
     @Override
     public void afterPropertiesSet() throws ServletException {
         super.afterPropertiesSet();
-        //为登录表单添加处理图片验证码处理器映射
+        //为登录表单添加处理图片验证码处理器映射 登陆请求一定做验证码
         urlMap.put(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_FORM, ValidateCodeType.IMAGE);
+        // 其他配置需要验证码的 url  做验证码
         addUrlToMap(securityProperties.getCode().getImage().getUrl(), ValidateCodeType.IMAGE);
 
         // 为手机登录地址添加验证码验证的映射
@@ -100,6 +102,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
 
     /**
      * 获取请求地址对于的处理器，如果未找到则标识不需要验证
+     * 有 url 是 /user/* 这样的需要 pathMatcher 做判断
      * @param request
      * @return
      */
