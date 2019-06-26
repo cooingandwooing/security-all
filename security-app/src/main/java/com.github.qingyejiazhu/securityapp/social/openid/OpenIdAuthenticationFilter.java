@@ -1,7 +1,7 @@
 package com.github.qingyejiazhu.securityapp.social.openid;
 
-import cn.mrcode.imooc.springsecurity.securitycore.properties.QQProperties;
-import cn.mrcode.imooc.springsecurity.securitycore.properties.SecurityConstants;
+import com.github.qingyejiazhu.securitycore.properties.QQProperties;
+import com.github.qingyejiazhu.securitycore.properties.SecurityConstants;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -25,7 +25,7 @@ public class OpenIdAuthenticationFilter extends
     // =====================================================================================
     private String openIdParameter = SecurityConstants.DEFAULT_PARAMETER_NAME_OPEN_ID;
     // 服务提供商id，qq还是微信
-    /** @see QQProperties#providerId */
+    /** @see QQProperties# providerId */
     private String providerIdParameter = SecurityConstants.DEFAULT_PARAMETER_NAME_PROVIDERID;
     private boolean postOnly = true;
 

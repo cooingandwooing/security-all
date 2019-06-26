@@ -21,7 +21,7 @@ public class TimeAspect {
     // 环绕通知 还有其他类型的注解
     // 这里的表达式在官网可以学习怎么使用
     // https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#aop
-    @Around("execution(* com.example.demo.web.controller.UserController.*(..))")
+    @Around("execution(* com.github.qingyejiazhu.securitydemo.web.controller.UserController.*(..))")
     public Object doAccessCheck(ProceedingJoinPoint point) throws Throwable {
         Instant start = Instant.now();
         Object proceed = point.proceed();  // 类似于调用过滤器链一样
