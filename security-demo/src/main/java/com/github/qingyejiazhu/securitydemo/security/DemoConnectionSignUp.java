@@ -1,16 +1,17 @@
 package com.github.qingyejiazhu.securitydemo.security;
 
+import com.github.qingyejiazhu.securitycore.social.SpringSocialConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionSignUp;
 
 /**
- * 第三方登录，默认注册用户
- * @author : zhuqiang
+ * 第三方登录，默认注册用户，这里偷偷注册
+ * @author : gxf
  * @version : V1.0
  * @date : 2018/8/6 20:04
- * @seei SpringSocialConfig #connectionSignUp  该对象存在则会在该地方被使用
+ * @see SpringSocialConfig# connectionSignUp  该对象存在则会在该地方被使用
  */
 //@Component
 public class DemoConnectionSignUp implements ConnectionSignUp {

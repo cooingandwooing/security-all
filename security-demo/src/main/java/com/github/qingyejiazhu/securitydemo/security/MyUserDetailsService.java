@@ -33,7 +33,7 @@ public class MyUserDetailsService implements UserDetailsService, SocialUserDetai
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // 根据用户名查找用户信息
-        logger.info("登录用户名:{}", username);
+        logger.info("表单登录用户名:{}", username);
         // 写死一个密码，赋予一个admin权限
 //        User admin = new User(username, "{noop}123456",
 //                              AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
@@ -43,10 +43,10 @@ public class MyUserDetailsService implements UserDetailsService, SocialUserDetai
 
     @Override
     public SocialUserDetails loadUserByUserId(String userId) throws UsernameNotFoundException {
-        logger.info("登录用户名:{}", userId);
+        logger.info("社交登录用户名:{}", userId);
         return getUserDetails(userId);
     }
-
+    // 这里用户名是业务系统的唯一标识 所以用 username 当作userid了
     private SocialUser getUserDetails(String username) {
         String password = passwordEncoder.encode("123456");
         logger.info("数据库密码{}", password);

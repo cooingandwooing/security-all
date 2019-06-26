@@ -1,0 +1,10 @@
+SpringSocialConfig getUsersConnectionRepository Encryptors.noOpText() 加解密工具需要修改哦
+
+请求qq授权的地址和授权完拿回token后跳转的地址是一个地址
+
+qq 请求地址由 org.springframework.social.security.SocialAuthenticationFilter控制;
+
+
+org.springframework.social.security.provider.OAuth2AuthenticationService # getAuthToken() 判断第几步跳回来的
+
+DemoConnectionSignUp 开启bean后 偷偷注册用户  不用 第三方登陆后 用户取注册了

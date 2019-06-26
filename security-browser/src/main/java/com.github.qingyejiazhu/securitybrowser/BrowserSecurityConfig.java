@@ -6,19 +6,18 @@ import com.github.qingyejiazhu.securitycore.authentication.AbstractChannelSecuri
 import com.github.qingyejiazhu.securitycore.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
 import com.github.qingyejiazhu.securitycore.properties.SecurityConstants;
 import com.github.qingyejiazhu.securitycore.properties.SecurityProperties;
-import com.github.qingyejiazhu.securitycore.validate.code.ValidateCodeFilter;
+import com.github.qingyejiazhu.securitycore.social.SpringSocialConfig;
 import com.github.qingyejiazhu.securitycore.validate.code.ValidateCodeSecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.social.security.SpringSocialConfigurer;
 
 import javax.sql.DataSource;
 
@@ -47,13 +46,22 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
     private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfigs;
     @Autowired
     private SecurityProperties securityProperties;
+
     // 之前已经写好的 MyUserDetailsService
     @Autowired
     private UserDetailsService userDetailsService;
+
     @Autowired
     private MyAuthenticationSuccessHandler myAuthenticationSuccessHandler;
+
     @Autowired
     private MyAuthenticationFailureHandler myAuthenticationFailureHandler;
+
+    /**
+     * @see SpringSocialConfig #imoocSocialSecurityConfig() 继承之后修改MySpringSocialConfigurer postProcess
+     */
+    @Autowired
+    private SpringSocialConfigurer imoocSocialSecurityConfig;
 
     @Bean
     public PersistentTokenRepository persistentTokenRepository() {
@@ -74,8 +82,8 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
         http.apply(validateCodeSecurityConfig)
                     .and()
                 .apply(smsCodeAuthenticationSecurityConfigs)
-                //.add()
-                //.apply(imoocSocialSecurityConfig)
+                    .and()
+                .apply(imoocSocialSecurityConfig) // 加一个过滤器 拦截特定请求做社交登陆
                     .and()
                 // 从这里开始配置记住我的功能
                 .rememberMe()
@@ -95,7 +103,7 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
                         securityProperties.getBrowser().getSignUpUrl(),
                         securityProperties.getBrowser().getSession().getSessionInvalidUrl()+".json",
                         securityProperties.getBrowser().getSession().getSessionInvalidUrl()+".html",
-                        "/user/regist")
+                        "/user/regist")// 这个是用户知道的注册路径 暂且写到这里
                 .permitAll()
                     .anyRequest()
                     .authenticated()

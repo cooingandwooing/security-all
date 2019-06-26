@@ -2,7 +2,7 @@ package com.github.qingyejiazhu.securityapp;
 
 /**
  * ${desc}
- * @author gaoxiaofeng
+ * @author zhuqiang
  * @version 1.0.1 2018/8/9 15:03
  * @date 2018/8/9 15:03
  * @since 1.0
