@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.view.AbstractView;
 
 /**
- * @author zhailiang
+ * @author 绑定成功的
  *
  */
 public class MyConnectView extends AbstractView {

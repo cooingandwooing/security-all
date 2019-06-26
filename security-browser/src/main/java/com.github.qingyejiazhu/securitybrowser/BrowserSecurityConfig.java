@@ -6,6 +6,7 @@ import com.github.qingyejiazhu.securitycore.authentication.AbstractChannelSecuri
 import com.github.qingyejiazhu.securitycore.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
 import com.github.qingyejiazhu.securitycore.properties.SecurityConstants;
 import com.github.qingyejiazhu.securitycore.properties.SecurityProperties;
+import com.github.qingyejiazhu.securitycore.properties.SessionProperties;
 import com.github.qingyejiazhu.securitycore.social.SpringSocialConfig;
 import com.github.qingyejiazhu.securitycore.validate.code.ValidateCodeSecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.security.web.session.InvalidSessionStrategy;
+import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 import org.springframework.social.security.SpringSocialConfigurer;
 
 import javax.sql.DataSource;
@@ -58,10 +61,21 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
     private MyAuthenticationFailureHandler myAuthenticationFailureHandler;
 
     /**
-     * @see SpringSocialConfig #imoocSocialSecurityConfig() 继承之后修改MySpringSocialConfigurer postProcess
+     * @see SpringSocialConfig#imoocSocialSecurityConfig() 继承之后修改MySpringSocialConfigurer postProcess
      */
     @Autowired
     private SpringSocialConfigurer imoocSocialSecurityConfig;
+
+    /**
+     * @see BrowserSecurityBeanConfig
+     */
+    @Autowired
+    private InvalidSessionStrategy invalidSessionStrategy;
+    /**
+     * @see BrowserSecurityBeanConfig
+     */
+    @Autowired
+    private SessionInformationExpiredStrategy sessionInformationExpiredStrategy;
 
     @Bean
     public PersistentTokenRepository persistentTokenRepository() {
@@ -78,6 +92,8 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         applyPasswordAuthenticationConfig(http);
+        SessionProperties session = securityProperties.getBrowser().getSession();
+
         // 一条搞定
         http.apply(validateCodeSecurityConfig)
                     .and()
@@ -93,6 +109,13 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
     //                .tokenValiditySeconds(60 * 5)
                     .userDetailsService(userDetailsService)
                     .and()
+                .sessionManagement()
+                    .invalidSessionStrategy(invalidSessionStrategy) //默认/session/invalid 可配置
+                    .maximumSessions(session.getMaximumSessions()) //限制同一个用户只能有一个session登录
+                    .maxSessionsPreventsLogin(session.isMaxSessionsPreventsLogin())  // 当session达到最大后，阻止后登录的行为
+                    .expiredSessionStrategy(sessionInformationExpiredStrategy)  // 失效后的策略。定制型更高，失效前的请求还能拿到
+                    .and()
+                    .and()
                 .authorizeRequests()
                 // 别忘记了拦截放行的地方也需要更改为配置类的属性
                 .antMatchers(
@@ -103,7 +126,7 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
                         securityProperties.getBrowser().getSignUpUrl(),
                         securityProperties.getBrowser().getSession().getSessionInvalidUrl()+".json",
                         securityProperties.getBrowser().getSession().getSessionInvalidUrl()+".html",
-                        "/user/regist")// 这个是用户知道的注册路径 暂且写到这里
+                        "/user/regist","/session/invalid")// 这个是用户知道的注册路径 暂且写到这里
                 .permitAll()
                     .anyRequest()
                     .authenticated()

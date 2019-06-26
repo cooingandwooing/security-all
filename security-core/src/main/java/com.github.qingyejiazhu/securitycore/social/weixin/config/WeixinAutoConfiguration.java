@@ -60,6 +60,7 @@ public class WeixinAutoConfiguration extends SocialConfigurerAdapter {
 	public UsersConnectionRepository getUsersConnectionRepository(ConnectionFactoryLocator connectionFactoryLocator) {
 		return null;
 	}
+	// 这里是解绑用的 和 绑定 才做成功的 视图一样 判断 model里面有connection
 	@Bean({"connect/weixinConnect", "connect/weixinConnected"})
 	@ConditionalOnMissingBean(name = "weixinConnectedView")
 	public View weixinConnectedView() {

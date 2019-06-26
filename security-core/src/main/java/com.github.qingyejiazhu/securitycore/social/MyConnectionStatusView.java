@@ -19,9 +19,11 @@ import org.springframework.web.servlet.view.AbstractView;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * @author zhailiang
+ * @author gaoxiaofeng
+ * 绑定与解绑
  *
  */
+// 视图组件的名字 spring 默认的 去找这个视图 ，但是spring 没有默认的实现
 @Component("connect/status")
 public class MyConnectionStatusView extends AbstractView {
 	

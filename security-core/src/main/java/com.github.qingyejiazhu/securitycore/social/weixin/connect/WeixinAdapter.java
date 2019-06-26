@@ -3,12 +3,12 @@
  */
 package com.github.qingyejiazhu.securitycore.social.weixin.connect;
 
+import com.github.qingyejiazhu.securitycore.social.weixin.api.Weixin;
+import com.github.qingyejiazhu.securitycore.social.weixin.api.WeixinUserInfo;
 import org.springframework.social.connect.ApiAdapter;
 import org.springframework.social.connect.ConnectionValues;
 import org.springframework.social.connect.UserProfile;
 
-import com.imooc.security.core.social.weixin.api.Weixin;
-import com.imooc.security.core.social.weixin.api.WeixinUserInfo;
 
 /**
  * 微信 api适配器，将微信 api的数据模型转为spring social的标准模型。

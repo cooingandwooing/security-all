@@ -20,8 +20,12 @@ public class MySessionInformationExpiredStrategy extends AbstractSessionStrategy
         super(invalidSessionUrl);
     }
 
+    // SessionInformationExpiredEvent session 超时时间
     @Override
     public void onExpiredSessionDetected(SessionInformationExpiredEvent event) throws IOException, ServletException {
+        // 这里简单写了一句话
+        // event.getResponse().setContentType("application/json;charset=UTF-8");
+        // event.getResponse().getWriter().write("并发登录！");
         onSessionInvalid(event.getRequest(), event.getResponse());
     }
 

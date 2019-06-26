@@ -85,7 +85,7 @@ public class BrowserSecurityController {
 		userInfo.setHeadimg(connection.getImageUrl());
 		return userInfo;
 	}
-
+	// session 失效的 处理地址
 	@GetMapping("/session/invalid")
 	@ResponseStatus(HttpStatus.UNAUTHORIZED)
 	public SimpleResponse sessionInvalid() {

@@ -16,6 +16,7 @@
 *.iws
 *.iml
 *.ipr
+out
 /out/
 /target/
 # ignore Maven generated target folders

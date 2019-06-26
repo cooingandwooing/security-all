@@ -3,10 +3,9 @@
  */
 package com.github.qingyejiazhu.securitycore.social.weixin.connect;
 
+import com.github.qingyejiazhu.securitycore.social.weixin.api.Weixin;
+import com.github.qingyejiazhu.securitycore.social.weixin.api.WeixinImpl;
 import org.springframework.social.oauth2.AbstractOAuth2ServiceProvider;
-
-import com.imooc.security.core.social.weixin.api.Weixin;
-import com.imooc.security.core.social.weixin.api.WeixinImpl;
 
 /**
  * 
