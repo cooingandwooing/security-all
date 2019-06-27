@@ -8,8 +8,8 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.github.qingyejiazhu.securitybrowser.support.SimpleResponse;
-import com.github.qingyejiazhu.securitybrowser.support.SocialUserInfo;
+import com.github.qingyejiazhu.securitycore.support.SimpleResponse;
+import com.github.qingyejiazhu.securitycore.support.SocialUserInfo;
 import com.github.qingyejiazhu.securitycore.properties.SecurityConstants;
 import com.github.qingyejiazhu.securitycore.properties.SecurityProperties;
 import com.github.qingyejiazhu.securitycore.social.SpringSocialConfig;

@@ -4,6 +4,7 @@ import com.github.qingyejiazhu.securitybrowser.authentication.MyAuthenticationFa
 import com.github.qingyejiazhu.securitybrowser.authentication.MyAuthenticationSuccessHandler;
 import com.github.qingyejiazhu.securitycore.authentication.AbstractChannelSecurityConfig;
 import com.github.qingyejiazhu.securitycore.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
+import com.github.qingyejiazhu.securitycore.authorize.AuthorizeConfigManager;
 import com.github.qingyejiazhu.securitycore.properties.SecurityConstants;
 import com.github.qingyejiazhu.securitycore.properties.SecurityProperties;
 import com.github.qingyejiazhu.securitycore.properties.SessionProperties;
@@ -16,6 +17,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.session.InvalidSessionStrategy;
@@ -36,11 +38,6 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
     private DataSource dataSource;
     @Autowired
     private PersistentTokenRepository persistentTokenRepository;
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
 
     @Autowired
     private ValidateCodeSecurityConfig validateCodeSecurityConfig;
@@ -76,6 +73,12 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
      */
     @Autowired
     private SessionInformationExpiredStrategy sessionInformationExpiredStrategy;
+
+    @Autowired
+    private LogoutSuccessHandler logoutSuccessHandler;
+
+    @Autowired
+    private AuthorizeConfigManager authorizeConfigManager;
 
     @Bean
     public PersistentTokenRepository persistentTokenRepository() {
@@ -115,6 +118,13 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
                     .maxSessionsPreventsLogin(session.isMaxSessionsPreventsLogin())  // 当session达到最大后，阻止后登录的行为
                     .expiredSessionStrategy(sessionInformationExpiredStrategy)  // 失效后的策略。定制型更高，失效前的请求还能拿到
                     .and()
+                    .and()
+                .logout()
+//                   .logoutUrl("/singout")  // 退出请求路径
+                    // 与logoutSuccessUrl互斥，有handler则logoutSuccessUrl失效
+                    // 通过处理器增加配置了页面则跳转到页面，没有则输出json
+                    .logoutSuccessHandler(logoutSuccessHandler)
+                    .deleteCookies("JSESSIONID")
                     .and()
                 .authorizeRequests()
                 // 别忘记了拦截放行的地方也需要更改为配置类的属性

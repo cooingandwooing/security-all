@@ -9,4 +9,6 @@ org.springframework.social.security.provider.OAuth2AuthenticationService # getAu
 
 DemoConnectionSignUp 开启bean后 偷偷注册用户  不用 第三方登陆后 用户取注册了
 
-org.springframework.social.connect.web.ConnectController spring默认的绑定解绑
+org.springframeworuuk.social.connect.web.ConnectController spring默认的绑定解绑
+
+signOutUrl 空 为发回json  有值 返回html

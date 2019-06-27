@@ -12,7 +12,7 @@ import org.springframework.social.security.SocialAuthenticationFilter;
 public class SocialProperties {
     // 这里是拦截地址 social 登陆的
     /**
-    * @see SocialAuthenticationFilter #DEFAULT_FILTER_PROCESSES_URL
+    * @see SocialAuthenticationFilter# DEFAULT_FILTER_PROCESSES_URL
     * */
     private String filterProcessesUrl = "/auth";
 

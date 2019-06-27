@@ -17,10 +17,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication(scanBasePackages =
         {
                 "com.github.qingyejiazhu.securitydemo",
-                "com.github.qingyejiazhu.securitybrowser",
-                //"com.github.qingyejiazhu.securityapp",
+                //"com.github.qingyejiazhu.securitybrowser",
+                "com.github.qingyejiazhu.securityapp",
                 "com.github.qingyejiazhu.securitycore",
-                //"com.github.qingyejiazhu.securityauthorize"
+                "com.github.qingyejiazhu.securityauthorize"
         })
 @RestController
 @EnableSwagger2

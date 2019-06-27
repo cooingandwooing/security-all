@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * 个性化的存储，应该在使用方控制
+ *
  * @author
  * @version 1.0.1 2018/8/3 9:16
  * @date 2018/8/3 9:16
@@ -46,15 +47,16 @@ public class MyUserDetailsService implements UserDetailsService, SocialUserDetai
         logger.info("社交登录用户名:{}", userId);
         return getUserDetails(userId);
     }
+
     // 这里用户名是业务系统的唯一标识 所以用 username 当作userid了
     private SocialUser getUserDetails(String username) {
         String password = passwordEncoder.encode("123456");
         logger.info("数据库密码{}", password);
         SocialUser admin = new SocialUser(username,
 //                              "{noop}123456",
-                                          password,
-                                          true, true, true, true,
-                                          AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_ADMIN"));
+                password,
+                true, true, true, true,
+                AuthorityUtils.commaSeparatedStringToAuthorityList("admin,ROLE_USER"));
         return admin;
     }
 }

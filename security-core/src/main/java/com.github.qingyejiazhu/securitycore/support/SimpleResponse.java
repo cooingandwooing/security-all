@@ -1,4 +1,4 @@
-package com.github.qingyejiazhu.securitybrowser.support;
+package com.github.qingyejiazhu.securitycore.support;
 
 /**
  * @author gaoxiaofeng

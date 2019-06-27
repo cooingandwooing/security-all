@@ -1,7 +1,7 @@
 package com.github.qingyejiazhu.securitybrowser.logout;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.qingyejiazhu.securitybrowser.support.SimpleResponse;
+import com.github.qingyejiazhu.securitycore.support.SimpleResponse;
 import com.github.qingyejiazhu.securitycore.properties.SecurityProperties;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.LoggerFactory;

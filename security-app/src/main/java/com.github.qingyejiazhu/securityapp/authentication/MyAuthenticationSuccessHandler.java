@@ -1,7 +1,6 @@
 package com.github.qingyejiazhu.securityapp.authentication;
 
-import cn.mrcode.imooc.springsecurity.securitycore.properties.LoginType;
-import cn.mrcode.imooc.springsecurity.securitycore.properties.SecurityProperties;
+import com.github.qingyejiazhu.securitycore.properties.SecurityProperties;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.LoggerFactory;

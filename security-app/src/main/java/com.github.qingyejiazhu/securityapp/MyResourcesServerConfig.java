@@ -1,14 +1,5 @@
 package com.github.qingyejiazhu.securityapp;
 
-/*
- *
- * ${desc}
- * @author zhuqiang
- * @version 1.0.1 2018/8/7 13:15
- * @date 2018/8/7 13:15
- * @since 1.0
- * */
-
 import com.github.qingyejiazhu.securityapp.social.openid.OpenIdAuthenticationSecurityConfig;
 import com.github.qingyejiazhu.securitycore.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
 import com.github.qingyejiazhu.securitycore.authorize.AuthorizeConfigManager;
@@ -16,10 +7,14 @@ import com.github.qingyejiazhu.securitycore.properties.SecurityConstants;
 import com.github.qingyejiazhu.securitycore.properties.SecurityProperties;
 import com.github.qingyejiazhu.securitycore.validate.code.ValidateCodeSecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.expression.OAuth2WebSecurityExpressionHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.social.security.SpringSocialConfigurer;
@@ -53,6 +48,8 @@ public class MyResourcesServerConfig extends ResourceServerConfigurerAdapter {
     @Autowired
     private AuthorizeConfigManager authorizeConfigManager;
 
+    @Autowired
+    private OAuth2WebSecurityExpressionHandler expressionHandler;
     // 有三个configure的方法，这里使用http参数的
     @Override
     public void configure(HttpSecurity http) throws Exception {
@@ -78,6 +75,25 @@ public class MyResourcesServerConfig extends ResourceServerConfigurerAdapter {
                 .csrf()
                 .disable();
         authorizeConfigManager.config(http.authorizeRequests());
+    }
+    //oauth的bug（详见：https://github.com/spring-projects/spring-security-oauth/issues/730#issuecomment-219480394)，
+    @Bean
+    public OAuth2WebSecurityExpressionHandler oAuth2WebSecurityExpressionHandler(ApplicationContext applicationContext) {
+
+        OAuth2WebSecurityExpressionHandler expressionHandler = new OAuth2WebSecurityExpressionHandler();
+
+        expressionHandler.setApplicationContext(applicationContext);
+
+        return expressionHandler;
+
+    }
+
+    @Override
+
+    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+
+        resources.expressionHandler(expressionHandler);
+
     }
 }
 

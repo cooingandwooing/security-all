@@ -4,7 +4,7 @@
 package com.github.qingyejiazhu.securitybrowser.session;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.qingyejiazhu.securitybrowser.support.SimpleResponse;
+import com.github.qingyejiazhu.securitycore.support.SimpleResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

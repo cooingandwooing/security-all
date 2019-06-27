@@ -1,0 +1,4 @@
+jaxb-ri运行时使用ClassLoader #defineClass / Unsafe #defineClass在运行时进行一些字节码修改以优化性能。首先尝试ClassLoader #defineClass，它会导致警告。
+在jaxb-ri master中完全删除了这个遗留优化（在2.3.0之后，尚未发布）。
+
+要禁用2.3.0的此优化，请设置系统属性com.sun.xml.bind.v2.bytecode.ClassTailor.noOptimize。在jaxb-ri master中完全删除了这个遗留优化（在2.3.0之后，尚未发布）。

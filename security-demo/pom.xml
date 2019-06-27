@@ -13,18 +13,27 @@
     <artifactId>security-demo</artifactId>
     <dependencies>
 
-        <dependency>
+<!--        <dependency>
             <groupId>com.github.qingyejiazhu</groupId>
             <artifactId>security-browser</artifactId>
             <version>${qingyejiazhu.security.version}</version>
-     <!--       <exclusions>
+     &lt;!&ndash;       <exclusions>
                 <exclusion>
                     <artifactId>bcpkix-jdk15on</artifactId>
                     <groupId>org.bouncycastle</groupId>
                 </exclusion>
-            </exclusions>-->
+            </exclusions>&ndash;&gt;
+        </dependency>-->
+        <dependency>
+            <groupId>com.github.qingyejiazhu</groupId>
+            <artifactId>security-app</artifactId>
+            <version>${qingyejiazhu.security.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.github.qingyejiazhu</groupId>
+            <artifactId>security-authorize</artifactId>
+            <version>${qingyejiazhu.security.version}</version>
+        </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
@@ -59,6 +68,14 @@
             <artifactId>wiremock</artifactId>
             <version>2.23.2</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
