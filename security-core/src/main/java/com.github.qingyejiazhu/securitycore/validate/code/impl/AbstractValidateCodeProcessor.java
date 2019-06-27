@@ -17,7 +17,9 @@ import java.util.Map;
  * @since 1.0
  */
 public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> implements ValidateCodeProcessor {
-    /** 由使用方注入具体实现 */
+    /** 由使用方注入具体实现
+     * @see----RedisValidateCodeRepository/SessionValidateCodeRepository
+     * */
     @Autowired
     private ValidateCodeRepository validateCodeRepository;
 

@@ -1,0 +1,5 @@
+1\com.github.qingyejiazhu.securitycore.validate.code.ValidateCodeException: 请在请求头中携带deviceId参数:
+	at com.github.qingyejiazhu.securityapp.validate.code.impl.RedisValidateCodeRepository.buildKey(RedisValidateCodeRepository.java:61)
+
+	这里我关闭了ValidateCodeFilter urlMap.put(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_FORM, ValidateCodeType.IMAGE);
+	视频中注释了 .apply(validateCodeSecurityConfig)，哈

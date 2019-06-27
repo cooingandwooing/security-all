@@ -1,0 +1,1 @@
+curl -i -X POST    -H "Content-Type:application/x-www-form-urlencoded"    -H "Authorization:Basic dGVzdDp0ZXN0"  -H "deviceId:xxx" 'http://127.0.0.1:8060/authentication/mobile?smsCode=612578&mobile=1321282033'

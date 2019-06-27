@@ -1,0 +1,235 @@
+{
+  "front-version": "2.19.2",
+  "version": 3,
+  "nodes": [
+    {
+      "type": "Project",
+      "description": "",
+      "id": "24acb906-7e27-46b1-af7f-656cefe2e6ab",
+      "lastModified": "2019-06-28T00:55:04.171+08:00",
+      "name": "security-all"
+    },
+    {
+      "type": "Scenario",
+      "id": "85aada69-62d5-4f48-a929-373a96883b6d",
+      "lastModified": "2019-06-28T00:33:17.584+08:00",
+      "name": "Scenario 1",
+      "requestOrder": [
+        "Request 1",
+        "Request 2",
+        "Request 3",
+        "Request 4"
+      ],
+      "parentId": "24acb906-7e27-46b1-af7f-656cefe2e6ab"
+    },
+    {
+      "uriEditor": true,
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "username",
+              "value": "jojo"
+            },
+            {
+              "enabled": true,
+              "name": "password",
+              "value": "123456"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:8060",
+        "path": "/authentication/form"
+      },
+      "id": "caab2704-a519-4c07-93aa-329d3feb4b17",
+      "lastModified": "2019-06-27T23:27:59.454+08:00",
+      "name": "Request 1",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded"
+        },
+        {
+          "enabled": true,
+          "name": "Authorization",
+          "value": "Basic dGVzdDp0ZXN0"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "85aada69-62d5-4f48-a929-373a96883b6d"
+    },
+    {
+      "uriEditor": true,
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:8060",
+        "path": "/user/me"
+      },
+      "id": "7d8c66d4-7870-44b4-9ded-0c46cbccc071",
+      "lastModified": "2019-06-27T23:47:02.628+08:00",
+      "name": "Request 2",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Authorization",
+          "value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb21wYW55IjoiaW1vb2MiLCJ1c2VyX25hbWUiOiJqb2pvIiwiYXV0aG9yaXRpZXMiOlsiYWRtaW4iLCJST0xFX1VTRVIiXSwianRpIjoiNDVhNTc1ZGUtMDU4ZS00NDg1LTkwYjYtNDE2ODcyYzM2ZGI4IiwiY2xpZW50X2lkIjoidGVzdCIsInNjb3BlIjpbXX0.cPxYBwA3vqF9QnipfbeNhX94z2MYKhiCywJmBpkFeBs"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "85aada69-62d5-4f48-a929-373a96883b6d"
+    },
+    {
+      "uriEditor": true,
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "mobile",
+              "value": "1321282033"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1:8060",
+        "path": "/code/sms"
+      },
+      "id": "f169c8e5-0e82-4d30-a0dc-33248432c1dc",
+      "lastModified": "2019-06-28T00:33:17.550+08:00",
+      "name": "Request 3",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "deviceId",
+          "value": "xxx"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "85aada69-62d5-4f48-a929-373a96883b6d"
+    },
+    {
+      "uriEditor": true,
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "smsCode",
+              "value": "421678"
+            },
+            {
+              "enabled": true,
+              "name": "mobile",
+              "value": "1321282033"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "127.0.0.1：8060",
+        "path": "/authentication/mobile"
+      },
+      "id": "9efd5e83-ade8-418e-bcb0-643d2b66e6fc",
+      "lastModified": "2019-06-28T00:50:11.184+08:00",
+      "name": "Request 4",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded"
+        },
+        {
+          "enabled": true,
+          "name": "Authorization",
+          "value": "Basic dGVzdDp0ZXN0"
+        },
+        {
+          "enabled": true,
+          "name": "deviseId",
+          "value": "xxx"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "85aada69-62d5-4f48-a929-373a96883b6d"
+    }
+  ]
+}

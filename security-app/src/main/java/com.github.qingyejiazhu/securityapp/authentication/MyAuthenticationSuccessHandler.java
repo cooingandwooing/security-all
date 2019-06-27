@@ -13,6 +13,7 @@ import org.springframework.security.oauth2.config.annotation.configuration.Clien
 import org.springframework.security.oauth2.provider.*;
 import org.springframework.security.oauth2.provider.request.DefaultOAuth2RequestFactory;
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
+import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.stereotype.Component;
@@ -50,6 +51,9 @@ public class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticat
     @Autowired
     private ClientDetailsService clientDetailsService;
 
+    /**
+     * @see DefaultTokenServices
+     * */
     @Autowired
     private AuthorizationServerTokenServices authorizationServerTokenServices;
 
@@ -118,7 +122,7 @@ public class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticat
      *                                 Base64
      */
     private String[] extractAndDecodeHeader(String header, HttpServletRequest request) throws IOException {
-
+        // 去掉前6
         byte[] base64Token = header.substring(6).getBytes("UTF-8");
         byte[] decoded;
         try {
@@ -135,6 +139,7 @@ public class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticat
         if (delim == -1) {
             throw new BadCredentialsException("Invalid basic authentication token");
         }
+        // 前面是用户名 后面是密码
         return new String[]{token.substring(0, delim), token.substring(delim + 1)};
     }
 }

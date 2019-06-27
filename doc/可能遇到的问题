@@ -1,0 +1,2 @@
+关于Invalid character found in method name. HTTP method names must be tokens的问题:
+后来在网上看见一贴，说是 本来是http的请求 错误使用https方式请求 就会报该错，于是测试了一下，果真如此！

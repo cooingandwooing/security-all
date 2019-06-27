@@ -1,0 +1,28 @@
+.idea 删除后 在maven中 reimport all maven project就好了（就是右侧的圈圈逆时针圈圈 图标）
+
+Ctrl+H 显示类结构图
+Ctrl+J  自动代码
+Ctrl+Alt+Space 类名或接口名提示
+Ctrl+P 方法参数提示
+Ctrl+Q 显示注释文档
+Ctrl+Alt+O 优化导入的类和包
+Alt＋Q可以看到当前方法的声明
+Alt+1 快速打开或隐藏工程面板
+Alt+ left/right 切换代码视图
+Alt+ Up/Down 在方法间快速移动定位
+Ctrl+B 快速打开光标处的类或方法
+1.Ctrl＋E，可以显示最近编辑的文件列表
+3.Ctrl＋[或]可以跳到大括号的开头结尾
+4.Ctrl＋Shift＋Backspace可以跳转到上次编辑的地方
+5.Ctrl＋F12，可以显示当前文件的结构
+Ctrl＋W可以选择单词继而语句继而行继而函数
+Shift + Home/End	选中光标到当前行头位置/行尾位置
+Ctrl + Home/End	跳到文件头/文件尾
+Ctrl + Shift + J	自动将下一行合并到当前行末尾（必备）
+Ctrl + Shift + U	对选中的代码进行大/小写轮流转换（必备）
+Ctrl + Delete	删除光标后面的单词或是中文句（必备）
+Ctrl + BackSpace	删除光标前面的单词或是中文句（必备）
+Ctrl + Shift + Up/Down	光标放在方法名上，将方法移动到上一个/下一个方法前面，调整方法排序（必备）
+Ctrl + Shift + 左键单击	把光标放在某个类变量上，按此快捷键可以直接定位到该类中（必备
+Alt + Shift + 左键双击	选择被双击的单词/中文句，按住不放，可以同时选择其他单词/中文句（必备）
+Ctrl + Shift + T	对当前类生成单元测试类，如果已经存在的单元测试类则可以进行选择（必备）

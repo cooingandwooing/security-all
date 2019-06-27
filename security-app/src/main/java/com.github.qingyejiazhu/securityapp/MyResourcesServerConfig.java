@@ -56,14 +56,16 @@ public class MyResourcesServerConfig extends ResourceServerConfigurerAdapter {
         // 最简单的修改默认配置的方法
         // 在v5+中，该配置（表单登录）应该是默认配置了
         // basic登录（也就是弹框登录的）应该是v5-的版本默认
-
+        // 这里copy了浏览器的安全配置 然后重构时处理重复代码
         http.formLogin()
                 .loginPage(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL)
                 .loginProcessingUrl(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_FORM)
                 .successHandler(myAuthenticationSuccessHandler)
                 .failureHandler(myAuthenticationFailureHandler)
         ;
+        // 好奇这里的路径安全配置怎么没有了
         http
+                // 这里验证表单和手机登录 中的 验证码
                 .apply(validateCodeSecurityConfig)
                 .and()
                 .apply(smsCodeAuthenticationSecurityConfigs)
@@ -72,8 +74,25 @@ public class MyResourcesServerConfig extends ResourceServerConfigurerAdapter {
                 .and()
                 .apply(openIdAuthenticationSecurityConfig)
                 .and()
-                .csrf()
-                .disable();
+                .authorizeRequests()
+                // 别忘记了拦截放行的地方也需要更改为配置类的属性
+                .antMatchers(
+                        SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,
+                        SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE,
+                        securityProperties.getBrowser().getLoginPage(),
+                        SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX+"/*",
+                        securityProperties.getBrowser().getSignUpUrl(),
+                        securityProperties.getBrowser().getSession().getSessionInvalidUrl()+".json",
+                        securityProperties.getBrowser().getSession().getSessionInvalidUrl()+".html",
+                        "/user/regist","/session/invalid")// 这个是用户知道的注册路径 暂且写到这里
+                .permitAll()
+                // 测试6.4 打开
+                //.antMatchers("/user/me")
+               // .access("hasAnyRole('ADMIN','USER','admin')")
+                .anyRequest()
+                .authenticated()
+                .and()
+                .csrf().disable();  // csrf 在后面章节会讲解;;
         authorizeConfigManager.config(http.authorizeRequests());
     }
     //oauth的bug（详见：https://github.com/spring-projects/spring-security-oauth/issues/730#issuecomment-219480394)，

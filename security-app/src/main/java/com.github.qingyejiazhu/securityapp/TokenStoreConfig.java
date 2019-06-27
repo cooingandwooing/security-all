@@ -25,7 +25,7 @@ public class TokenStoreConfig {
     private RedisConnectionFactory redisConnectionFactory;
 
     @Bean
-    @ConditionalOnProperty(prefix = "imooc.security.oauth2", name = "tokenStore", havingValue = "redis")
+    @ConditionalOnProperty(prefix = "zhanlu.security.oauth2", name = "tokenStore", havingValue = "redis")
     public TokenStore tokenStore() {
         return new MyRedisTokenStore(redisConnectionFactory);
     }
@@ -33,7 +33,7 @@ public class TokenStoreConfig {
     @Configuration
     // matchIfMissing ：当tokenStore没有值的时候是否生效
     // 当tokenStore = jwt的时候或则tokenStore没有配置的时候使用下面的配置
-    @ConditionalOnProperty(prefix = "imooc.security.oauth2", name = "tokenStore", havingValue = "jwt", matchIfMissing = true)
+    @ConditionalOnProperty(prefix = "zhanlu.security.oauth2", name = "tokenStore", havingValue = "jwt", matchIfMissing = true)
     public static class JwtTokenConfig {
         @Autowired
         private SecurityProperties securityProperties;

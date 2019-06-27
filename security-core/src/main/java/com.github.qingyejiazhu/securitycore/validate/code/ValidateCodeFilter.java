@@ -53,6 +53,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
     public void afterPropertiesSet() throws ServletException {
         super.afterPropertiesSet();
         //为登录表单添加处理图片验证码处理器映射 登陆请求一定做验证码
+        //# 没用redis的时候测试 app 需要 关闭图片验证码拦截地址
         urlMap.put(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_FORM, ValidateCodeType.IMAGE);
         // 其他配置需要验证码的 url  做验证码
         addUrlToMap(securityProperties.getCode().getImage().getUrl(), ValidateCodeType.IMAGE);
