@@ -1,12 +1,12 @@
 package com.github.qingyejiazhu.securitycore.properties;
 
 /**
- * @author :
+ * @author : gxf
  * @version : V1.0
- * @date : 2018/8/11 15:23
  */
 public class OAuth2Properties {
     private OAuth2ClientProperties[] clients = {};
+    // jwt唯一的安全性是下面的密签
     private String jwtSigningKey = "mrcode";
 
     public OAuth2ClientProperties[] getClients() {

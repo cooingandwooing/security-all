@@ -10,20 +10,24 @@ import org.springframework.social.security.SocialAuthenticationFilter;
 import org.springframework.stereotype.Component;
 
 /**
- * @author zhailiang
+ * @author gxf
  */
 @Component
 public class AppSocialAuthenticationFilterPostProcessor implements SocialAuthenticationFilterPostProcessor {
 
+    /**
+     * @see com.github.qingyejiazhu.securityapp.authentication.MyAuthenticationSuccessHandler
+     * */
     @Autowired
-    private AuthenticationSuccessHandler imoocAuthenticationSuccessHandler;
+    private AuthenticationSuccessHandler myAuthenticationSuccessHandler;
 
     /**
      * @see com.github.qingyejiazhu.securitycore.social.SocialAuthenticationFilterPostProcessor#process(SocialAuthenticationFilter)
      */
     @Override
     public void process(SocialAuthenticationFilter socialAuthenticationFilter) {
-        socialAuthenticationFilter.setAuthenticationSuccessHandler(imoocAuthenticationSuccessHandler);
+        // 将成功处理器设置成  返回令牌的
+        socialAuthenticationFilter.setAuthenticationSuccessHandler(myAuthenticationSuccessHandler);
     }
 
 }

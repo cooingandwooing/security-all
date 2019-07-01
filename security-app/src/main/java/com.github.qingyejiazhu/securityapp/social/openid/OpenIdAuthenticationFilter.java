@@ -38,7 +38,7 @@ public class OpenIdAuthenticationFilter extends
 
     // ~ Methods
     // ========================================================================================================
-
+    // app（通过简化模式或者其他模式拿到qq等的token 和 openid）------->（请求 ）我们应用后台
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response) throws AuthenticationException {
@@ -62,7 +62,7 @@ public class OpenIdAuthenticationFilter extends
 
         // Allow subclasses to set the "details" property
         setDetails(request, authRequest);
-
+        // 交给 provider 校验
         return this.getAuthenticationManager().authenticate(authRequest);
     }
 

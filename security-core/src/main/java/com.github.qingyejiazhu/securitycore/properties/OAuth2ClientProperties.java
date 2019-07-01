@@ -11,7 +11,7 @@ public class OAuth2ClientProperties {
     private String[] authorizedGrantTypes = {};
     private String[] redirectUris = {}; // 信任的回调域
     private String[] scopes = {};
-    private int accessTokenValiditySeconds; // token有效期
+    private int accessTokenValiditySeconds = 7200; // token有效期 默认是0 意味着发出去的令牌不会过期
 
     public String getClientId() {
         return clientId;

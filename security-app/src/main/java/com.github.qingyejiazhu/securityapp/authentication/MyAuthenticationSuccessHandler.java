@@ -26,6 +26,7 @@ import java.util.Base64;
 
 /**
  * .formLogin().successHandler() 中需要的处理器类型
+ *
  * @author zhuqiang
  * @version 1.0.1 2018/8/3 16:29
  * @date 2018/8/3 16:29
@@ -46,6 +47,7 @@ public class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticat
 
     /**
      * 授权服务器：自动配置的
+     *
      * @see ClientDetailsServiceConfiguration#clientDetailsService()
      */
     @Autowired
@@ -53,7 +55,7 @@ public class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticat
 
     /**
      * @see DefaultTokenServices
-     * */
+     */
     @Autowired
     private AuthorizationServerTokenServices authorizationServerTokenServices;
 
@@ -101,6 +103,9 @@ public class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticat
          *
          * 在这里我就有一个疑问了：这个token应该代表的是不同的用户，这里使用我们配置的同一个client？那么获取到的不就是相同的token？
          * 难道说是根据用户名和密码创建的？以后明白了再来填坑
+         * 后补填坑：org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationProcessingFilter 跟源码这里
+         * 能看到，之前在发送 token 的时候 其实是和 用户信息（针对当前这个场景流程来说）关联上的，并且放入了 tokenService 中
+         * 验证的时候从 tokenService 中获取出来的
          * */
 
         TokenRequest tokenRequest = new TokenRequest(MapUtils.EMPTY_SORTED_MAP, clientId, clientDetails.getScope(), "costom");
@@ -118,6 +123,7 @@ public class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticat
 
     /**
      * Decodes the header into a username and password.
+     *
      * @throws BadCredentialsException if the Basic header is not present or is not valid
      *                                 Base64
      */

@@ -58,10 +58,10 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
     private MyAuthenticationFailureHandler myAuthenticationFailureHandler;
 
     /**
-     * @see SpringSocialConfig#imoocSocialSecurityConfig() 继承之后修改MySpringSocialConfigurer postProcess
+     * @see SpringSocialConfig#mySocialSecurityConfig() 继承之后修改MySpringSocialConfigurer postProcess
      */
     @Autowired
-    private SpringSocialConfigurer imoocSocialSecurityConfig;
+    private SpringSocialConfigurer mySocialSecurityConfig;
 
     /**
      * @see BrowserSecurityBeanConfig
@@ -102,7 +102,7 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
                     .and()
                 .apply(smsCodeAuthenticationSecurityConfigs)
                     .and()
-                .apply(imoocSocialSecurityConfig) // 加一个过滤器 拦截特定请求做社交登陆
+                .apply(mySocialSecurityConfig) // 加一个过滤器 拦截特定请求做社交登陆
                     .and()
                 // 从这里开始配置记住我的功能
                 .rememberMe()

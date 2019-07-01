@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.ServletWebRequest;
 
 /**
- * @author zhuqiang
+ * @author gxf
  * @version 1.0.1 2018/8/9 14:28
  * @date 2018/8/9 14:28
  * @see ProviderSignInUtils 模拟其中部分的功能
@@ -29,35 +29,42 @@ public class AppSignUpUtils implements SignUpUtils {
     // 目前为止都是自动配置的，直接获取即可
     @Autowired
     private UsersConnectionRepository usersConnectionRepository;
+    // 用于定位connectionfactory
     @Autowired
     private ConnectionFactoryLocator connectionFactoryLocator;
 
     @Override
     public void saveConnection(ServletWebRequest request, ConnectionData connectionData) {
-        redisTemplate.opsForValue().set(buildKey(request), connectionData);
+        redisTemplate.opsForValue().set(getKey(request), connectionData);
     }
 
     /**
      * @param userId
      * @param request
+     * 登陆注册 /user/regist
      * @see ProviderSignInAttempt# addConnection(String, ConnectionFactoryLocator, UsersConnectionRepository)
      */
     @Override
     public void doPostSignUp(String userId, ServletWebRequest request) {
-        String key = buildKey(request);
+        String key = getKey(request);
+        if(!redisTemplate.hasKey(key)){
+            throw new AppSecretException("无法找到缓存的第三方用户社交账号信息");
+        }
         ConnectionData connectionData = (ConnectionData) redisTemplate.opsForValue().get(key);
         usersConnectionRepository.createConnectionRepository(userId).addConnection(getConnection(connectionFactoryLocator, connectionData));
+        redisTemplate.delete(key);//----------
     }
 
     public Connection<?> getConnection(ConnectionFactoryLocator connectionFactoryLocator, ConnectionData connectionData) {
+        // 根据ProviderId qq还是微信 的就拿连接工厂
         return connectionFactoryLocator.getConnectionFactory(connectionData.getProviderId()).createConnection(connectionData);
     }
 
-    private String buildKey(ServletWebRequest request) {
+    private String getKey(ServletWebRequest request) {
         String deviceId = request.getHeader(AppConstants.DEFAULT_HEADER_DEVICE_ID);
         if (StringUtils.isBlank(deviceId)) {
             throw new AppSecretException("设备id参数不能为空");
         }
-        return "imooc:security:social.connect." + deviceId;
+        return "zhanlu:security:social.connect." + deviceId;
     }
 }

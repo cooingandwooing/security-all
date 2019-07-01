@@ -9,6 +9,8 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 
 /**
  * 浏览器环境下安全配置主类
+ * 貌似这个类十分重要
+ * @see WebSecurityConfigurerAdapter# authenticationManager
  *
  * @author : zhuqiang
  * @version : V1.0

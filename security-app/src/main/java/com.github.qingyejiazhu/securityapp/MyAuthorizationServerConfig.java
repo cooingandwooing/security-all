@@ -2,6 +2,7 @@ package com.github.qingyejiazhu.securityapp;
 
 import com.github.qingyejiazhu.securitycore.properties.OAuth2ClientProperties;
 import com.github.qingyejiazhu.securitycore.properties.SecurityProperties;
+import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +28,15 @@ import java.util.List;
 
 /**
  * ${desc}
+ *
  * @author zhuqiang
  * @version 1.0.1 2018/8/7 10:52
  * @date 2018/8/7 10:52
  * @since 1.0
  */
+/*//AuthorizationServerConfigurerAdapter 可以添加自定义的配置 端点 安全性 第三方应用的配
+// AuthorizationServerConfigurerAdapter这个类被继承后 默认的client_id 配置就不能用了 （待测试）,原因是OAuth2AuthorizationServerConfiguration 不会初始化 认证服务器不能正常工作
+//用下面的配置*/
 @Configuration
 @EnableAuthorizationServer
 public class MyAuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
@@ -41,6 +46,10 @@ public class MyAuthorizationServerConfig extends AuthorizationServerConfigurerAd
     @Autowired
     private SecurityProperties securityProperties;
 
+    // 防止服务器重启  令牌失效
+    /**
+     * @see TokenStoreConfig
+     * **/
     @Autowired(required = false)
     public TokenStore tokenStore;
 
@@ -58,19 +67,24 @@ public class MyAuthorizationServerConfig extends AuthorizationServerConfigurerAd
         this.authenticationManager = authenticationConfiguration.getAuthenticationManager();
     }
 
+    // 给哪些应用发令牌
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        InMemoryClientDetailsServiceBuilder inMemory = clients.inMemory();
+        // 自己app和应用用的 内存的就好  如果像qq一样提供第三方认证 需要 数据库配
+        InMemoryClientDetailsServiceBuilder builder = clients.inMemory();
         OAuth2ClientProperties[] clientsInCustom = securityProperties.getOauth2().getClients();
-        for (OAuth2ClientProperties p : clientsInCustom) {
-            inMemory.withClient(p.getClientId())
-                    .secret(p.getClientSecret())
-                    .redirectUris(p.getRedirectUris())
-                    .authorizedGrantTypes(p.getAuthorizedGrantTypes())
-                    .accessTokenValiditySeconds(p.getAccessTokenValiditySeconds())
-                    .scopes(p.getScopes());
+        if(ArrayUtils.isNotEmpty(clientsInCustom)){
+            for (OAuth2ClientProperties p : clientsInCustom) {
+                builder.withClient(p.getClientId())
+                        .secret(p.getClientSecret())
+                        .redirectUris(p.getRedirectUris())
+                        .authorizedGrantTypes(p.getAuthorizedGrantTypes())
+                        .accessTokenValiditySeconds(p.getAccessTokenValiditySeconds())
+                        .refreshTokenValiditySeconds(2592000)
+                        .scopes(p.getScopes());
+            }
+            logger.info(Arrays.toString(clientsInCustom));
         }
-        logger.info(Arrays.toString(clientsInCustom));
     }
 
     @Override
@@ -84,8 +98,8 @@ public class MyAuthorizationServerConfig extends AuthorizationServerConfigurerAd
         if (jwtAccessTokenConverter != null && jwtTokenEnhancer != null) {
             TokenEnhancerChain enhancerChain = new TokenEnhancerChain();
             List<TokenEnhancer> enhancers = new ArrayList<>();
-            enhancers.add(jwtTokenEnhancer);
-            enhancers.add(jwtAccessTokenConverter);
+            enhancers.add(jwtTokenEnhancer);// 加信息的
+            enhancers.add(jwtAccessTokenConverter);// 密签转换器
             enhancerChain.setTokenEnhancers(enhancers);
             // 一个处理链，先添加，再转换
             endpoints

@@ -10,7 +10,7 @@ import org.springframework.social.security.SocialAuthenticationFilter;
  *
  */
 public class SocialProperties {
-    // 这里是拦截地址 social 登陆的
+    // 这里是拦截地址 social 登陆的 默认 项目中改成了 @see imooc-signIn.html /qqLogin
     /**
     * @see SocialAuthenticationFilter# DEFAULT_FILTER_PROCESSES_URL
     * */

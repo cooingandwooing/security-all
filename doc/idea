@@ -1,5 +1,11 @@
 .idea 删除后 在maven中 reimport all maven project就好了（就是右侧的圈圈逆时针圈圈 图标）
 
+Unmapped Spring configuration files found.Please configure Spring facet.” :
+    这个提示不影响工程正常运行，但是，作为一个强迫症~~每天看到这个提示内心是躁动和不安的。于是研究了一下，原因是web工程中的spring配置文件没有被IDEA所管理，解决这个问题也很简单，只需要2步操作即可：
+
+    1.“Ctrl+Shift+Alt+S”打开project的配置界面，选择“Modules”页签，再选择报“Unmapped Spring configuration files found.”的Module，点击“+”按钮；
+    2.在弹出的窗口内，全部勾选Unmapped的Spring配置文件，点击“确定”，然后在父界面中点击“应用”或“确定”完成保存。
+
 Ctrl+H 显示类结构图
 Ctrl+J  自动代码
 Ctrl+Alt+Space 类名或接口名提示

@@ -15,11 +15,11 @@ import java.util.Map;
  * @author zhailiang
  *
  */
-public class ImoocJwtTokenEnhancer implements TokenEnhancer {
+public class MyJwtTokenEnhancer implements TokenEnhancer {
 	@Override
 	public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
 		Map<String, Object> info = new HashMap<>();
-		info.put("company", "imooc");
+		info.put("company", "zhanlu");
 
 		// 设置附加信息
 		((DefaultOAuth2AccessToken)accessToken).setAdditionalInformation(info);

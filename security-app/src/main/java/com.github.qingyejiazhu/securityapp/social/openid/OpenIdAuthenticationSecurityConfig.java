@@ -37,6 +37,7 @@ public class OpenIdAuthenticationSecurityConfig
     public void configure(HttpSecurity builder) throws Exception {
         OpenIdAuthenticationProvider provider = new OpenIdAuthenticationProvider();
         provider.setUserDetailsService(userDetailsService);
+        // 数据库 userconnect表中查 数据
         provider.setUsersConnectionRepository(usersConnectionRepository);
 
         OpenIdAuthenticationFilter filter = new OpenIdAuthenticationFilter();

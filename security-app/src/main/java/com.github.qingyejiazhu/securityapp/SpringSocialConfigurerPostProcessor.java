@@ -6,7 +6,8 @@ import org.springframework.social.security.SpringSocialConfigurer;
 import org.springframework.stereotype.Component;
 
 /**
- * @author : zhuqiang
+ * @author : gxf
+ * 在app 环境下 才改signupUrl 不管用户配置的是什么  在注册的时候都跳到/social/signUp
  * @version : V1.0
  * @date : 2018/8/8 23:49
  */
@@ -25,7 +26,7 @@ public class SpringSocialConfigurerPostProcessor implements BeanPostProcessor {
         /**
          * @see SpringSocialConfig#imoocSocialSecurityConfig()
          */
-        if (beanName.equals("imoocSocialSecurityConfig")) {
+        if (beanName.equals("mySocialSecurityConfig")) {
             SpringSocialConfigurer config = (SpringSocialConfigurer) bean;
             config.signupUrl("/social/signUp");
             return bean;

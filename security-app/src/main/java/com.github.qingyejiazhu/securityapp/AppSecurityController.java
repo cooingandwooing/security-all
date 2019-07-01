@@ -32,6 +32,7 @@ public class AppSecurityController {
     @Autowired
     private AppSignUpUtils appSignUpUtils;
 
+    //SpringSocialConfigurerPostProcessor 决定不管用户配置的是什么  在注册的时候都跳到/social/signUp
     @GetMapping(value = "/social/signUp")
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ConnectionData signUp(HttpServletRequest request) {

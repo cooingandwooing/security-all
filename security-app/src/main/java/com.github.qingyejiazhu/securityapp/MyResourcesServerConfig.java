@@ -5,6 +5,7 @@ import com.github.qingyejiazhu.securitycore.authentication.mobile.SmsCodeAuthent
 import com.github.qingyejiazhu.securitycore.authorize.AuthorizeConfigManager;
 import com.github.qingyejiazhu.securitycore.properties.SecurityConstants;
 import com.github.qingyejiazhu.securitycore.properties.SecurityProperties;
+import com.github.qingyejiazhu.securitycore.social.SpringSocialConfig;
 import com.github.qingyejiazhu.securitycore.validate.code.ValidateCodeSecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -32,10 +33,10 @@ public class MyResourcesServerConfig extends ResourceServerConfigurerAdapter {
     @Autowired
     private ValidateCodeSecurityConfig validateCodeSecurityConfig;
     /**
-     * @see -SocialConfig #imoocSocialSecurityConfig()
+     * @see SpringSocialConfig#mySocialSecurityConfig()
      */
     @Autowired
-    private SpringSocialConfigurer imoocSocialSecurityConfig;
+    private SpringSocialConfigurer mySocialSecurityConfig;
 
     @Autowired
     private AuthenticationSuccessHandler myAuthenticationSuccessHandler;
@@ -70,8 +71,9 @@ public class MyResourcesServerConfig extends ResourceServerConfigurerAdapter {
                 .and()
                 .apply(smsCodeAuthenticationSecurityConfigs)
                 .and()
-                .apply(imoocSocialSecurityConfig)
+                .apply(mySocialSecurityConfig)
                 .and()
+                // 支持简化模式 openId providerId 登陆 重构社交登陆
                 .apply(openIdAuthenticationSecurityConfig)
                 .and()
                 .authorizeRequests()
@@ -84,7 +86,13 @@ public class MyResourcesServerConfig extends ResourceServerConfigurerAdapter {
                         securityProperties.getBrowser().getSignUpUrl(),
                         securityProperties.getBrowser().getSession().getSessionInvalidUrl()+".json",
                         securityProperties.getBrowser().getSession().getSessionInvalidUrl()+".html",
-                        "/user/regist","/session/invalid")// 这个是用户知道的注册路径 暂且写到这里
+                        "/error",
+                        "/connect/*",
+                        "/auth/*",
+                        "/signin",
+                        "/social/signUp",//社交注册
+                        "/user/regist","/session/invalid"
+                )// 这个是用户知道的注册路径 暂且写到这里
                 .permitAll()
                 // 测试6.4 打开
                 //.antMatchers("/user/me")

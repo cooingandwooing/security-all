@@ -1,5 +1,7 @@
 package com.github.qingyejiazhu.securitydemo.web.controller;
 import com.github.qingyejiazhu.securitycore.properties.SecurityProperties;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import com.github.qingyejiazhu.securitycore.social.SignUpUtils;
 import com.github.qingyejiazhu.securitydemo.dto.User;
@@ -102,7 +104,7 @@ public class UserController {
      * 下面有几种获取方法，可以查看类里面的信息
      * @return
      */
-/*    @GetMapping("/me")
+    @GetMapping("/me")
     public Object getCurrentUser(@AuthenticationPrincipal UserDetails userDetails, Authentication authentication, HttpServletRequest request) throws UnsupportedEncodingException {
 //        Authentication authentication1 = SecurityContextHolder.getContext().getAuthentication();
         // Authorization : bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb21wYW55IjoiaW1vb2MiLCJ1c2VyX25hbWUiOiJhZG1pbiIsImp0aSI6ImRjYzVmODIwLWUwNmYtNDYyNi1hYmMyLTAyZTljZjdkZjhmOCIsImNsaWVudF9pZCI6Im15aWQiLCJzY29wZSI6WyJhbGwiXX0.nYFBXcLBN3WNef0sooNxS0s6CaEleDGfjZh7xtTEqf4
@@ -117,10 +119,10 @@ public class UserController {
         // JwtAccessTokenConverter类，解析出来是一个map
         // 所以这个自带的JwtAccessTokenConverter对象也是可以直接用来解析的
         byte[] bytes = jwtSigningKey.getBytes("utf-8");
-        Claims body = Jwts.parser().setSigningKey(bytes).parseClaimsJws(token).getBody();
-
-        return body;
-    }*/
+        Claims claims = Jwts.parser().setSigningKey(bytes).parseClaimsJws(token).getBody();
+        //String company = (String)claims.get("company");
+        return claims;
+    }
     //这个是测试的 name 一致就不用写了
 /*    @RequestMapping(value = "/user", method = RequestMethod.GET)
     //public List<User> query(@RequestParam(required = false, name = "username", defaultValue = "no user")  String nikename){
@@ -148,10 +150,10 @@ public class UserController {
         }
         */
     // 这样写 spring 会注入
-    @GetMapping("/me")
+/*    @GetMapping("/me")
     public Authentication getCurrentUser(Authentication authentication) {
         return authentication;
-    }
+    }*/
 
     @PostMapping("/regist")
     public void regist(User user, HttpServletRequest request) {

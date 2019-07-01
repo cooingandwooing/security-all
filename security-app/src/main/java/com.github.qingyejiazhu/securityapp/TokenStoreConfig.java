@@ -1,6 +1,6 @@
 package com.github.qingyejiazhu.securityapp;
 
-import com.github.qingyejiazhu.securityapp.jwt.ImoocJwtTokenEnhancer;
+import com.github.qingyejiazhu.securityapp.jwt.MyJwtTokenEnhancer;
 import com.github.qingyejiazhu.securitycore.MyRedisTokenStore;
 import com.github.qingyejiazhu.securitycore.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +57,7 @@ public class TokenStoreConfig {
         // 先不纠结这个问题了。就这样吧。也就是封装程度的问题
         @ConditionalOnBean(TokenEnhancer.class)
         public TokenEnhancer jwtTokenEnhancer() {
-            return new ImoocJwtTokenEnhancer();
+            return new MyJwtTokenEnhancer();
         }
     }
 }

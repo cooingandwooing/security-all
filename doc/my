@@ -12,3 +12,5 @@ DemoConnectionSignUp 开启bean后 偷偷注册用户  不用 第三方登陆后
 org.springframeworuuk.social.connect.web.ConnectController spring默认的绑定解绑
 
 signOutUrl 空 为发回json  有值 返回html
+
+关注一下MySpringSocialConfigurer filter.setFilterProcessesUrl(filterProcessesUrl);我注掉了
